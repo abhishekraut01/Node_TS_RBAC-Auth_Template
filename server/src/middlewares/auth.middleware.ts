@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { ApiError } from "../utils/apiError.js";
+import { ApiError } from '../utils/apiError.js';
 
 interface TokenPayload {
   sub: string; // userId
@@ -8,7 +8,11 @@ interface TokenPayload {
   exp?: number;
 }
 
-export const authenticate = (req: Request, _res: Response, next: NextFunction) =>{
+export const authenticate = (
+  req: Request,
+  _res: Response,
+  next: NextFunction
+) => {
   try {
     const token =
       req.cookies?.accessToken ||

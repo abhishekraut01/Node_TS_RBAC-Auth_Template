@@ -11,8 +11,8 @@ export const options: Ioptions = {
 };
 
 export interface RefreshTokenPayload {
-  sub: string;      
-  tokenId: string;  
+  sub: string;
+  tokenId: string;
   iat?: number;
   exp?: number;
 }
