@@ -2,7 +2,7 @@ export class ApiResponse<T> {
   public success: boolean;
   public statusCode: number;
   public message: string;
-  public data?: T;
+  public data: T | undefined;
 
   constructor(statusCode: number, message: string, data?: T) {
     this.success = statusCode >= 200 && statusCode < 300;
