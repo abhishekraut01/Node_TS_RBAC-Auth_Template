@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { userSignInSchema, userSignUpSchema } from "@repo/validation/authSchema"
-import { ApiError } from "@repo/utils/apiError"
-import { ApiResponse } from "@repo/utils/apiResponse"
-import { AsyncHandler } from "@repo/utils/asyncHandler"
-import { prisma } from "@repo/db/prisma";
+import { userSignInSchema, userSignUpSchema } from "../validation/authSchema.js"
+import { ApiError } from "../utils/apiError.js";
+import { ApiResponse } from "../utils/apiResponse.js";
+import { AsyncHandler } from "../utils/asyncHandler.js";
+import { prisma } from "../db/index.js";
 import { createSession } from "../services/createSession.js";
 import bcrypt from "bcrypt";
 import { options, RefreshTokenPayload } from "../interface/index.js";
