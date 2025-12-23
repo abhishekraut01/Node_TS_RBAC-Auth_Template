@@ -1,5 +1,5 @@
 // src/lib/prisma.ts
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "../generated/prisma/client.js";
 
 class PrismaSingleton {
   private static instance: PrismaClient;
