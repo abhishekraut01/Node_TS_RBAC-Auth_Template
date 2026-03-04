@@ -94,8 +94,15 @@ export async function getCurrentUser(userId: string) {
   return user;
 }
 
-export async function refreshToken(token: string, ip: string, userAgent: string) {
-  const decoded = jwt.verify(token, ENV.JWT_REFRESH_SECRET) as RefreshTokenPayload;
+export async function refreshToken(
+  token: string,
+  ip: string,
+  userAgent: string
+) {
+  const decoded = jwt.verify(
+    token,
+    ENV.JWT_REFRESH_SECRET
+  ) as RefreshTokenPayload;
 
   const session = await prisma.session.findFirst({
     where: {
@@ -113,7 +120,12 @@ export async function refreshToken(token: string, ip: string, userAgent: string)
   await prisma.session.delete({ where: { id: session.id } });
 
   // Use the current role from DB, not the stale one from the token
-  const tokens = await createSession(session.user.id, session.user.role, ip, userAgent);
+  const tokens = await createSession(
+    session.user.id,
+    session.user.role,
+    ip,
+    userAgent
+  );
 
   return { tokens };
 }

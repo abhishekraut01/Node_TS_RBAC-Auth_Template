@@ -16,7 +16,9 @@ export async function createSession(
 }> {
   const refreshTokenId = randomBytes(48).toString('hex');
 
-  const refreshExpiresAt = new Date(Date.now() + ms(ENV.REFRESH_TOKEN_EXPIRY as ms.StringValue));
+  const refreshExpiresAt = new Date(
+    Date.now() + ms(ENV.REFRESH_TOKEN_EXPIRY as ms.StringValue)
+  );
 
   const newSession = await prisma.session.create({
     data: {
@@ -36,9 +38,13 @@ export async function createSession(
     } as SignOptions
   );
 
-  const accessToken = jwt.sign({ sub: userId, role, sid: newSession.id }, ENV.JWT_ACCESS_SECRET, {
-    expiresIn: ENV.ACCESS_TOKEN_EXPIRY,
-  } as SignOptions);
+  const accessToken = jwt.sign(
+    { sub: userId, role, sid: newSession.id },
+    ENV.JWT_ACCESS_SECRET,
+    {
+      expiresIn: ENV.ACCESS_TOKEN_EXPIRY,
+    } as SignOptions
+  );
 
   return {
     accessToken,

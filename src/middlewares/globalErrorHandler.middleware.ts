@@ -3,8 +3,12 @@ import logger from '../utils/logger.js';
 import type { NextFunction, Request, Response } from 'express';
 import { ZodError } from 'zod';
 
-const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
-
+const errorHandler = (
+  err: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   if (err instanceof AppError) {
     return res.status(err.statusCode).json({
       success: false,

@@ -12,7 +12,8 @@ const app: Application = express();
 
 app.set('trust proxy', 1);
 
-const ALLOWED_ORIGINS = ENV.ALLOWED_ORIGINS?.split(',').map(o => o.trim()) || [];
+const ALLOWED_ORIGINS =
+  ENV.ALLOWED_ORIGINS?.split(',').map((o) => o.trim()) || [];
 
 app.use(
   cors({
@@ -26,13 +27,20 @@ app.use(
       if (ALLOWED_ORIGINS.includes(origin)) {
         callback(null, true);
       } else {
-        console.error(`CORS Blocked: Origin ${origin} not in [${ALLOWED_ORIGINS.join(', ')}]`);
+        console.error(
+          `CORS Blocked: Origin ${origin} not in [${ALLOWED_ORIGINS.join(', ')}]`
+        );
         callback(new Error('Not allowed by CORS'));
       }
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'X-Requested-With',
+      'Accept',
+    ],
     optionsSuccessStatus: 200,
   })
 );

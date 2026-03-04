@@ -1,4 +1,3 @@
-
 import { AccessTokenPayload } from '../interfaces/auth.interfaces.ts';
 
 declare global {
@@ -13,4 +12,4 @@ declare global {
   }
 }
 
-export { };
+export {};
