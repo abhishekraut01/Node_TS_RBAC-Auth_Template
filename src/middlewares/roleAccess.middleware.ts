@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
-import { AppError } from '../utils/AppError.js';
+import { AppError } from '../utils/appError.js';
 import { Role } from '../generated/prisma/client.js';
 
 export const authorize = (...allowedRoles: Role[]) => {

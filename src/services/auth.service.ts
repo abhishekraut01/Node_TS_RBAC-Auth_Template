@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { prisma } from '../db/index.js';
 import { createSession } from './createSession.service.js';
-import { AppError } from '../utils/AppError.js';
+import { AppError } from '../utils/appError.js';
 import { ENV } from '../configs/env.js';
 import type {
   RefreshTokenPayload,

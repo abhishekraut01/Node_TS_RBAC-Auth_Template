@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { userSignInSchema, userSignUpSchema } from '../validation/auth.schema.js';
-import { AppError } from '../utils/AppError.js';
+import { AppError } from '../utils/appError.js';
 import { ApiResponse } from '../utils/apiResponse.js';
 import { AsyncHandler } from '../utils/asyncHandler.js';
 import { getCookieOptions } from '../interface/auth.interfaces.js';

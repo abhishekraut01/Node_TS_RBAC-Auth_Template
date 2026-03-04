@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { AppError } from '../utils/AppError.js';
+import { AppError } from '../utils/appError.js';
 import type { AccessTokenPayload } from '../interface/auth.interfaces.js';
 import { AsyncHandler } from '../utils/asyncHandler.js';
 import { getAccessTokenFromRequest } from '../utils/getToken.js';

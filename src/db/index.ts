@@ -2,7 +2,7 @@ import { PrismaClient } from '../generated/prisma/client.js';
 import { PrismaPg } from '@prisma/adapter-pg';
 import pg from 'pg';
 import { ENV } from '../configs/env.js';
-import { AppError } from '../utils/AppError.js';
+import { AppError } from '../utils/appError.js';
 
 const connectionString = ENV.DATABASE_URL;
 

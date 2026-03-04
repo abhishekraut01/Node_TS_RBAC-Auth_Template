@@ -1,4 +1,3 @@
-
 import jwt, { type SignOptions } from 'jsonwebtoken';
 import { randomBytes } from 'crypto';
 import ms from 'ms';
