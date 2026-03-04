@@ -8,38 +8,39 @@ datasource db {
 }
 
 model Users {
-  id                            String   @id @default(uuid())
-  username                      String   @unique
-  phone_number                  String   @unique
-  role                          Role     @default(EMPLOYEE)
-  password                      String
-  createdAt                     DateTime @default(now())
-  updatedAt                     DateTime @updatedAt
+  id       String @id @default(uuid())
+  username String @unique @db.VarChar(50)
+  email    String @unique @db.VarChar(255)
+  password String
+  role     Role   @default(USER)
 
-  sessions                      Session[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
 
+  sessions Session[]
+
+  @@index([email])
   @@index([username])
-  @@index([phone_number])
+  @@index([deletedAt])
 }
 
 enum Role {
-  EMPLOYEE
+  USER
   ADMIN
-  CUTTER
-  DESIGNER
 }
 
 model Session {
-  id                           String @id @default(uuid())
-  userId                       String
-  user                         Users  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String @id @default(uuid())
+  userId String
+  user   Users  @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  refreshToken                 String  @unique
-  userAgent                    String?
-  ip                           String?
+  refreshToken String  @unique
+  userAgent    String?
+  ip           String?
 
-  createdAt                    DateTime @default(now())
-  expiresAt                    DateTime
+  createdAt DateTime @default(now())
+  expiresAt DateTime
 
   @@index([userId])
   @@index([refreshToken])
