@@ -3,7 +3,7 @@ import { userSignInSchema, userSignUpSchema } from '../validation/auth.schema.js
 import { AppError } from '../utils/AppError.js';
 import { ApiResponse } from '../utils/apiResponse.js';
 import { AsyncHandler } from '../utils/asyncHandler.js';
-import { getCookieOptions } from '../interfaces/auth.interfaces.js';
+import { getCookieOptions } from '../interface/auth.interfaces.js';
 import { getRefreshTokenFromRequest } from '../utils/getToken.js';
 import * as authService from '../services/auth.service.js';
 
