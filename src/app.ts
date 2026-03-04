@@ -2,7 +2,7 @@ import type { Application, NextFunction, Request, Response } from 'express';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import errorHandler from './middlewares/globalErrorHandler.middleware.js';
-import { requestLogger } from './middlewares/';
+import { requestLogger } from './middlewares/requestLogger.middleware.js';
 import apiRouter from './routes/index.routes.js';
 import { ApiResponse } from './utils/apiResponse.js';
 import { ENV } from './configs/env.js';

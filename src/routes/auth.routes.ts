@@ -10,13 +10,11 @@ import {
 import { authenticate } from '../middlewares/auth.middleware.js';
 
 const router: Router = Router();
-
-// auth.routes.ts
-router.post('/signup', handleSignup);
-router.post('/signin', handleSignin);
-router.post('/logout', authenticate, handleLogout);
-router.get('/health', healthCheck);
-router.get('/me', authenticate, getCurrentUser);
-router.post('/refresh-token', refreshAccessToken);
+router.route('/signup').post(handleSignup);
+router.route('/signin').post(handleSignin);
+router.route('/logout').post(authenticate, handleLogout);
+router.route('/health').get(healthCheck);
+router.route('/me').get(authenticate, getCurrentUser);
+router.route('/refresh-token').post(refreshAccessToken);
 
 export default router;
