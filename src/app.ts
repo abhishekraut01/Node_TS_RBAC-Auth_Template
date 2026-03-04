@@ -9,7 +9,7 @@ app.use(express.urlencoded({ limit: '5mb', extended: true }));
 
 // Import and use routes
 import authRoute from './routes/auth.routes.js';
-import errorHandler from './middlewares/globalErrorHandler.js';
+import errorHandler from './middlewares/globalErrorHandler.middleware.js';
 app.use('/api/v1/auth', authRoute);
 
 // 404 Handler
