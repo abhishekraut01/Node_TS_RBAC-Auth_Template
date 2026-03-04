@@ -1,39 +1,40 @@
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { ApiError } from '../utils/appError.js';
+import { AppError } from '../utils/AppError.js';
+import type { AccessTokenPayload } from '../interface/auth.interfaces.js';
+import { AsyncHandler } from '../utils/asyncHandler.js';
+import { getAccessTokenFromRequest } from '../utils/getToken.js';
+import { ENV } from '../configs/env.js';
 
-interface TokenPayload {
-  sub: string; // userId
-  iat?: number;
-  exp?: number;
-}
+export const authenticate = AsyncHandler(async (req, _res, next) => {
+  const token = getAccessTokenFromRequest(req);
 
-export const authenticate = (
-  req: Request,
-  _res: Response,
-  next: NextFunction
-) => {
-  try {
-    const token =
-      req.cookies?.accessToken ||
-      req.header('Authorization')?.replace('Bearer ', '');
-
-    if (!token) {
-      throw new ApiError(401, 'Token not found');
-    }
-
-    const secretKey = process.env.JWT_ACCESS_SECRET;
-
-    if (!secretKey) {
-      throw new ApiError(
-        500,
-        'Server misconfiguration: Access token secret is missing.'
-      );
-    }
-    const decoded = jwt.verify(token, secretKey) as TokenPayload;
-    req.user = { id: decoded.sub };
-    next();
-  } catch (error) {
-    next(error);
+  if (!token) {
+    throw new AppError(401, 'Authentication required');
   }
-};
+
+  let payload: AccessTokenPayload;
+
+  try {
+    payload = jwt.verify(token, ENV.JWT_ACCESS_SECRET) as AccessTokenPayload;
+  } catch {
+    throw new AppError(401, 'Invalid or expired token');
+  }
+
+  // Verify session still exists in DB (enables immediate revocation on logout)
+  // const session = await prisma.session.findUnique({
+  //   where: { id: payload.sid },
+  // });
+
+  // if (!session) {
+  //   throw new AppError(401, 'Session has been revoked');
+  // }
+
+  req.user = {
+    id: payload.sub,
+    role: payload.role,
+    sessionId: payload.sid,
+  };
+
+  next();
+});
