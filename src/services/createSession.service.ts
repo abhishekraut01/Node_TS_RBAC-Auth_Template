@@ -3,7 +3,7 @@ import { randomBytes } from 'crypto';
 import ms from 'ms';
 import { prisma } from '../db/index.js';
 import { ENV } from '../configs/env.js';
-import { Role } from '../generated/prisma/client.js';
+import { Role } from '../../generated/prisma/index.js';
 
 export async function createSession(
   userId: string,
