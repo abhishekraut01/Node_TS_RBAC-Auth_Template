@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { randomBytes } from 'crypto';
-import { prisma } from '@repo/db/prisma';
+import { prisma } from '../db/index.js';
 
 export async function createSession(
   userId: string,
