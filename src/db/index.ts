@@ -15,9 +15,10 @@ const pool = new pg.Pool({
   max: ENV.DB_POOL_SIZE,
   idleTimeoutMillis: 30_000,
   connectionTimeoutMillis: 10_000,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl:
+    ENV.NODE_ENV === 'production'
+      ? { rejectUnauthorized: false }
+      : false,
 });
 
 pool.on('error', (err) => {

@@ -26,7 +26,11 @@ export async function signUp(data: SignUpInput, ip: string, userAgent: string) {
   }
 
   const newUser = await prisma.users.create({
-    data: { username, email, password: hashedPassword },
+    data: {
+      username,
+      email,
+      password: hashedPassword
+    },
   });
 
   const tokens = await createSession(newUser.id, newUser.role, ip, userAgent);

@@ -7,8 +7,15 @@ import apiRouter from './routes/index.routes.js';
 import { ApiResponse } from './utils/apiResponse.js';
 import { ENV } from './configs/env.js';
 import cors from 'cors';
+import helmet from "helmet";
 
 const app: Application = express();
+
+app.use(
+  helmet({
+    contentSecurityPolicy: false
+  })
+);
 
 app.set('trust proxy', 1);
 
